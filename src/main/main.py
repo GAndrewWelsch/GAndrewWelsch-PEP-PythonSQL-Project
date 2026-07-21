@@ -52,6 +52,7 @@ def load_and_clean_users(file_path):
     with open(file_path) as userFile:
         userReader = csv.reader(userFile, delimiter=' ', quotechar='|')
         for row in userReader:
+            print(row)
             cursor.execute(f"INSERT INTO users (firstName, lastName) VALUES ({row[0]}, {row[1]})")
     print("TODO: load_users")
 
