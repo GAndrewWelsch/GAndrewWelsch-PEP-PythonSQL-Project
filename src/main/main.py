@@ -28,6 +28,7 @@ def main():
         userId INTEGER,
         FOREIGN KEY (userId) REFERENCES users(userId)
     )''')
+    cursor.commit()
 
     # You will implement these methods below. They just print TO-DO messages for now.
     load_and_clean_users('../../resources/users.csv')
