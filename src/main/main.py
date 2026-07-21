@@ -53,7 +53,7 @@ def load_and_clean_users(file_path):
         userReader = csv.reader(userFile)
         header = next(userFile)
         for row in userReader:
-            if (len(row) == 2 and row.join().isAlpha()):
+            if (len(row) == 2 and row.join().isalpha()):
                 cursor.execute(("INSERT INTO users(firstName, lastName) VALUES (?, ?)"), (row[0], row[1]))
             conn.commit()
 
