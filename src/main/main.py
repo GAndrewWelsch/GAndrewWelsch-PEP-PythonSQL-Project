@@ -53,7 +53,7 @@ def load_and_clean_users(file_path):
         userReader = csv.reader(userFile)
         header = next(userFile)
         for row in userReader:
-            if (len(row) == 2 and row[0].isalpha() and row[1].isalpha()):
+            if (len(row) == 2 and row[0] != " " and row[1] != " "):
                 cursor.execute(("INSERT INTO users(firstName, lastName) VALUES (?, ?)"), (row[0], row[1]))
             conn.commit()
 
@@ -62,9 +62,9 @@ def load_and_clean_users(file_path):
 def load_and_clean_call_logs(file_path):
     with open(file_path) as logFile:
         logReader = csv.reader(logFile)
-        header = next(userFile)
+        header = next(logFile)
         for row in logReader:
-            if (len(row) == 2 and row[0].isalpha() and row[1].isalpha()):
+            if (len(row) == 5 and row[0].isalpha() and row[1].isalpha()):
                 cursor.execute(("INSERT INTO users(firstName, lastName) VALUES (?, ?)"), (row[0], row[1]))
             conn.commit()
 
