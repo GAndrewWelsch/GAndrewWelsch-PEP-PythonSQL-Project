@@ -53,15 +53,20 @@ def load_and_clean_users(file_path):
         userReader = csv.reader(userFile)
         header = next(userFile)
         for row in userReader:
-            alphalist = list(map(str.isalpha, row))
-            if (len(row) == 2 and all(alphalist)):
+            if (len(row) == 2 and row[0].isalpha() and row[1].isalpha()):
                 cursor.execute(("INSERT INTO users(firstName, lastName) VALUES (?, ?)"), (row[0], row[1]))
             conn.commit()
 
 
 # This function will load the callLogs.csv file into the callLogs table, discarding any records with incomplete data
 def load_and_clean_call_logs(file_path):
-        
+    with open(file_path) as logFile:
+        logReader = csv.reader(logFile)
+        header = next(userFile)
+        for row in logReader:
+            if (len(row) == 2 and row[0].isalpha() and row[1].isalpha()):
+                cursor.execute(("INSERT INTO users(firstName, lastName) VALUES (?, ?)"), (row[0], row[1]))
+            conn.commit()
 
 
 # This function will write analytics data to testUserAnalytics.csv - average call time, and number of calls per user.
