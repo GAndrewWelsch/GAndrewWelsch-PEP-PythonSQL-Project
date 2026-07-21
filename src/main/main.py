@@ -54,7 +54,7 @@ def load_and_clean_users(file_path):
         header = next(userFile)
         for row in userReader:
             if (len(row) == 2 and row[0].isalpha() and row[1].isalpha()):
-                cursor.execute(("INSERT INTO users(firstName, lastName) VALUES (?, ?)"), (row[0], row[1]))
+                cursor.execute(("""INSERT INTO users(firstName, lastName) VALUES (?, ?)"""), (row[0], row[1]))
             conn.commit()
 
 
@@ -66,7 +66,8 @@ def load_and_clean_call_logs(file_path):
         for row in logReader:
             if (len(row) == 5 and row[1].isdigit() and row[2].isdigit() 
             and row[3].isalpha() and row[4].isdigit()):
-                cursor.execute(("INSERT INTO users(firstName, lastName) VALUES (?, ?)"), (row[0], row[1]))
+                cursor.execute(("""INSERT INTO calllogs(phoneNumber, startTime, endTime, direction, userID) 
+                VALUES (?, ?, ?, ?, ?)"""), (row[0], row[1], row[2], row[3], row[4]))
             conn.commit()
 
 
