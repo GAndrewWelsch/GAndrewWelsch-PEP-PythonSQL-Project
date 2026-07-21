@@ -55,6 +55,7 @@ def load_and_clean_users(file_path):
             print(row)
             if (len(row) == 2):
                 cursor.execute(f"INSERT INTO users (firstName, lastName) VALUES ({row[0]}, {row[1]})")
+                conn.commit()
     print("TODO: load_users")
 
 
