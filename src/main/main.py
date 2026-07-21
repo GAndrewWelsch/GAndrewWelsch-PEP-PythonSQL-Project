@@ -50,13 +50,12 @@ def main():
 def load_and_clean_users(file_path):
 
     with open(file_path) as userFile:
-        userReader = csv.reader(userFile, delimiter=' ', quotechar='|')
+        userReader = csv.reader(userFile)
         for row in userReader:
             print(row)
             if (len(row) == 2):
                 cursor.execute(f"INSERT INTO users (firstName, lastName) VALUES ({row[0]}, {row[1]})")
             conn.commit()
-    print("TODO: load_users")
 
 
 # This function will load the callLogs.csv file into the callLogs table, discarding any records with incomplete data
