@@ -80,7 +80,7 @@ def write_user_analytics(csv_file_path):
     with open(csv_file_path, 'w') as analyticsFile:
         analyticsWriter = csv.writer(analyticsFile)
         analyticsWriter.writerow(["userId,avgDuration,numCalls"])
-        cursor.execute("SELECT userId, (avg(endTime)-avg(startTime)) FROM callLogs GROUP BY userID")
+        cursor.execute("SELECT userId, (avg(endTime)-avg(startTime)), (count(userId)) FROM callLogs GROUP BY userID")
         rows = cursor.fetchall()
         for row in rows:
                 analyticsWriter.writerow([f"{row[0]},{row[1]},{row[2]}"])
