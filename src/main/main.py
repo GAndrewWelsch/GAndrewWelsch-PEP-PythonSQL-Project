@@ -98,7 +98,7 @@ def write_ordered_calls(csv_file_path):
         rows = cursor.fetchall()
         for row in rows:
             print(row)
-            orderedCallsWriter.writerow([row[0],row[1],row[2],row[3],row[4]])
+            orderedCallsWriter.writerow([row[0],row[1],row[2],row[3],row[4], row[5]])
     orderedCallsFile.close()
 
 
