@@ -1,2 +1,6 @@
-userId,avgDuration,numCalls
-
+"userId,avgDuration,numCalls"
+"1,Alice,Smith"
+"2,Bob,Jones"
+"3,Charlie,Johnson"
+"4,Dave,Brown"
+"5,Eve,Williams"

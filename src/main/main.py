@@ -30,10 +30,10 @@ def main():
     )''')
 
     # You will implement these methods below. They just print TO-DO messages for now.
-    load_and_clean_users('../../resources/users.csv')
-    load_and_clean_call_logs('../../resources/callLogs.csv')
-    write_user_analytics('../../resources/userAnalytics.csv')
-    write_ordered_calls('../../resources/orderedCalls.csv')
+    load_and_clean_users('resources/users.csv')
+    load_and_clean_call_logs('resources/callLogs.csv')
+    write_user_analytics('resources/userAnalytics.csv')
+    write_ordered_calls('resources/orderedCalls.csv')
 
     # Helper method that prints the contents of the users and callLogs tables. Uncomment to see data.
     # select_from_users_and_call_logs()
@@ -56,6 +56,7 @@ def load_and_clean_users(file_path):
             if (len(row) == 2 and row[0].isalpha() and row[1].isalpha()):
                 cursor.execute(("""INSERT INTO users(firstName, lastName) VALUES (?, ?)"""), (row[0], row[1]))
             conn.commit()
+    userFile.close()
 
 
 # This function will load the callLogs.csv file into the callLogs table, discarding any records with incomplete data
@@ -69,6 +70,7 @@ def load_and_clean_call_logs(file_path):
                 cursor.execute(("""INSERT INTO calllogs(phoneNumber, startTime, endTime, direction, userID) 
                 VALUES (?, ?, ?, ?, ?)"""), (row[0], row[1], row[2], row[3], row[4]))
             conn.commit()
+    logFile.close()
 
 
 # This function will write analytics data to testUserAnalytics.csv - average call time, and number of calls per user.
@@ -76,13 +78,14 @@ def load_and_clean_call_logs(file_path):
 # example: 1,105.0,4 - where 1 is the userId, 105.0 is the avgDuration, and 4 is the numCalls.
 def write_user_analytics(csv_file_path):
 
-    with open(csv_file_path, 'a') as analyticsFile:
+    with open(csv_file_path, 'w') as analyticsFile:
         analyticsWriter = csv.writer(analyticsFile)
+        analyticsWriter.writerow(["userId,avgDuration,numCalls"])
         cursor.execute('select * from users')
         rows = cursor.fetchall()
-        print(rows)
         for row in rows:
-                analyticsWriter.writerow([f"{row[0], row[1], row[2]}"])
+                analyticsWriter.writerow([f"{row[0]},{row[1]},{row[2]}"])
+        analyticsFile.close()
 
 
 # This function will write the callLogs ordered by userId, then start time.
