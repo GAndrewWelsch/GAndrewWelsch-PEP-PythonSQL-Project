@@ -49,7 +49,7 @@ def main():
 # This function will load the users.csv file into the users table, discarding any records with incomplete data
 def load_and_clean_users(file_path):
 
-    with open(file_path) as userFile:
+    with open(file_path, 'r') as userFile:
         userReader = csv.reader(userFile)
         header = next(userFile)
         for row in userReader:
@@ -60,7 +60,7 @@ def load_and_clean_users(file_path):
 
 # This function will load the callLogs.csv file into the callLogs table, discarding any records with incomplete data
 def load_and_clean_call_logs(file_path):
-    with open(file_path) as logFile:
+    with open(file_path, 'r') as logFile:
         logReader = csv.reader(logFile)
         header = next(logFile)
         for row in logReader:
@@ -76,7 +76,12 @@ def load_and_clean_call_logs(file_path):
 # example: 1,105.0,4 - where 1 is the userId, 105.0 is the avgDuration, and 4 is the numCalls.
 def write_user_analytics(csv_file_path):
 
-    print("TODO: write_user_analytics")
+    with open(csv_file_path, 'a') as analyticsFile:
+        analyticsWriter = csv.writer(analyticsFile)
+        cursor.execute('select * from users')
+        rows = cursor.fetchall()
+        for row in rows:
+                analyticsWriter.writerow([f"{row[0], row[1], row[2]}"])
 
 
 # This function will write the callLogs ordered by userId, then start time.
