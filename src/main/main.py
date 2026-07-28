@@ -80,6 +80,7 @@ def write_user_analytics(csv_file_path):
         analyticsWriter = csv.writer(analyticsFile)
         cursor.execute('select * from users')
         rows = cursor.fetchall()
+        print(rows)
         for row in rows:
                 analyticsWriter.writerow([f"{row[0], row[1], row[2]}"])
 
